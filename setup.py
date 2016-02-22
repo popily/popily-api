@@ -7,14 +7,17 @@ try:
    import pypandoc
    long_description = pypandoc.convert(cwd + '/README.md', 'rst')
 except (IOError, ImportError):
-   long_description = open(cwd + '/README.md').read()
+   try:
+      long_description = open(cwd + '/README.md').read()
+   except:
+      long_description = 'Official Popily API client'
 
 setup(name='popily-api',
-      version='0.0.2',
+      version='0.0.3',
       description='Official Python client for the Popily API',
       long_description=long_description,
       url='https://github.com/popily/popily-api',
-      download_url ='https://github.com/ushahidi/geograpy/tarball/0.0.2',
+      download_url ='https://github.com/ushahidi/geograpy/tarball/0.0.3',
       author='Jonathon Morgan',
       author_email='jonathon@popily.com',
       license='MIT',
