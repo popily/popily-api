@@ -1,3 +1,5 @@
+import requests
+
 class Popily:
     def __init__(self, token, url=None):
         self.auth_header = {'Authorization': 'Token ' + token}
