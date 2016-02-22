@@ -1,11 +1,13 @@
 from setuptools import setup
 import os
 
+cwd = os.path.dirname(os.path.realpath(__file__))
+
 try:
    import pypandoc
-   long_description = pypandoc.convert('README.md', 'rst')
+   long_description = pypandoc.convert(cwd + '/README.md', 'rst')
 except (IOError, ImportError):
-   long_description = open('README.md').read()
+   long_description = open(cwd + '/README.md').read()
 
 setup(name='popily-api',
       version='0.0.1',
