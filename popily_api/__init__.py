@@ -60,8 +60,6 @@ class Popily:
     
     def get_sources(self):
         endpoint = self.BASE_URL + '/api/sources/'
-        if source_id:
-            endpoint += str(source_id) + '/'
 
         r = requests.get(endpoint, headers=self.auth_header)
         return r.json()
