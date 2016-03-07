@@ -25,6 +25,23 @@ class Popily:
         return packed_str
 
 
+    def _assign_editables(self, data_dict, kwargs):
+        editables = [
+            'title',
+            'x_label',
+            'y_label',
+            'z_label',
+            'category_order',
+            'time_interval'
+        ]
+
+        for key in editables:
+            if key in kwargs:
+                data_dict[key] = kwargs[key]
+
+        return data_dict
+
+
     def add_source(self, **kwargs):
         endpoint = self.BASE_URL + '/api/sources/'
 
@@ -76,7 +93,7 @@ class Popily:
 
         payload = {'source': source_id}
 
-        for key in ['columns', 'insight_types', 'insight_type_categories']:
+        for key in ['columns', 'insight_types', 'insight_actions']:
             if key in kwargs:
                 payload[key] = ','.join(kwargs[key])
 
@@ -86,7 +103,18 @@ class Popily:
         if 'full' in kwargs:
             payload['full'] = kwargs['full']
 
+        if 'single' in kwargs:
+            payload['single'] = kwargs['single']
+
+        for key in ['full', 'height', 'width']:
+            if key in kwargs:
+                payload[key] = kwargs[key]
+
+        print dict(kwargs)
+        payload = self._assign_editables(payload, kwargs)
+
         r = requests.get(endpoint, headers=self.auth_header,params=payload)
+
         return r.json()
 
 
@@ -101,6 +129,9 @@ class Popily:
             if key in kwargs:
                 payload[key] = kwargs[key] 
 
+        payload = self._assign_editables(payload, kwargs)
+
+
         r = requests.get(endpoint, headers=self.auth_header, params=payload)
         return r.json()
 
@@ -109,19 +140,7 @@ class Popily:
         endpoint = self.BASE_URL + '/api/insights/' + str(insight_id) + '/'
 
         post_data = {}
-
-        editables = [
-            'title',
-            'x_label',
-            'y_label',
-            'z_label',
-            'category_order',
-            'time_interval'
-        ]
-
-        for key in editables:
-            if key in kwargs:
-                post_data[key] = kwargs[key]
+        post_data = self._assign_editables(post_data, kwargs)
 
 
         if 'filters' in kwargs:
