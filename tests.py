@@ -2,9 +2,11 @@ import unittest
 from popily_api import *
 from settings import API_KEY, CONNECTION_STRING
 
+URL = 'https://staging.popily.com'
+
 class APITest(unittest.TestCase):
     def test_add_source(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
 
         source_data = {
             'connection_string': CONNECTION_STRING,
@@ -42,27 +44,27 @@ class APITest(unittest.TestCase):
 
 
     def test_get_sources(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         sources = popily.get_sources()
         self.assertTrue('results' in sources)
         self.assertTrue(len(sources['results']) > 0)
 
 
     def test_get_source(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         source = popily.get_source('employees-limit-100-1')
         self.assertTrue('id' in source)
 
 
     def test_get_insights(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         insights = popily.get_insights('employees-limit-100-1')
         self.assertTrue('results' in insights)
         self.assertTrue(len(insights['results']) > 0)
 
 
     def test_get_insights_columns(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         insights = popily.get_insights('employees-limit-100-1',columns=['gender'])
         all_insights = popily.get_insights('employees-limit-100-1')
         self.assertTrue('results' in insights)
@@ -71,7 +73,7 @@ class APITest(unittest.TestCase):
 
 
     def test_get_insights_filters(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         insights = popily.get_insights('employees-limit-100-1',
                                         columns=['gender','hire_date'], 
                                         filters=[{'column':'gender','values': ['F']}],
@@ -84,7 +86,7 @@ class APITest(unittest.TestCase):
 
 
     def test_get_insights_single(self):
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         insight = popily.get_insights('employees-limit-100-1',
                                         columns=['gender','hire_date'], 
                                         filters=[{'column':'gender','values': ['F']}],
@@ -115,7 +117,7 @@ class APITest(unittest.TestCase):
 
     def test_customize_insight(self):
         import uuid
-        popily = Popily(API_KEY, url='https://staging.popily.com')
+        popily = Popily(API_KEY, url=URL)
         random_title = str(uuid.uuid4().get_hex().upper()[0:6])
         insight = popily.get_insights('employees-limit-100-1',
                                         columns=['gender','hire_date'], 

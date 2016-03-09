@@ -32,7 +32,8 @@ class Popily:
             'y_label',
             'z_label',
             'category_order',
-            'time_interval'
+            'time_interval',
+            'refresh_rate'
         ]
 
         for key in editables:
@@ -110,7 +111,6 @@ class Popily:
             if key in kwargs:
                 payload[key] = kwargs[key]
 
-        print dict(kwargs)
         payload = self._assign_editables(payload, kwargs)
 
         r = requests.get(endpoint, headers=self.auth_header,params=payload)

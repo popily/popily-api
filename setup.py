@@ -13,11 +13,11 @@ except (IOError, ImportError):
       long_description = 'Official Popily API client'
 
 setup(name='popily-api',
-      version='0.0.7',
+      version='0.0.8',
       description='Official Python client for the Popily API',
       long_description=long_description,
       url='https://github.com/popily/popily-api',
-      download_url ='https://github.com/ushahidi/geograpy/tarball/0.0.7',
+      download_url ='https://github.com/ushahidi/geograpy/tarball/0.0.8',
       author='Jonathon Morgan',
       author_email='jonathon@popily.com',
       license='MIT',
