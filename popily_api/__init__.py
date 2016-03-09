@@ -47,7 +47,7 @@ class Popily:
         endpoint = self.BASE_URL + '/api/sources/'
 
         post_data = {}
-        for key in ['columns', 'title', 'description']:
+        for key in ['columns', 'title', 'description', 'created_by']:
             if key in kwargs:
                 post_data[key] = kwargs[key]
 
