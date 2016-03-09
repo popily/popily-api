@@ -149,3 +149,33 @@ class Popily:
 
         r = requests.put(endpoint, json=post_data, headers=self.auth_header)
         return r.json()
+
+
+    def add_user(self, **kwargs):
+        endpoint = self.BASE_URL + '/api/users/'
+
+        if 'username' not in kwargs:
+            raise 'username is a required argument'
+
+        post_data = {}
+        post_data['username'] = kwargs['username']
+
+        r = requests.post(endpoint, json=post_data, 
+                    headers=self.auth_header)
+
+        print r.text
+
+        return r.json()
+
+
+    def get_users(self):
+        endpoint = self.BASE_URL + '/api/users/'
+
+        r = requests.get(endpoint, headers=self.auth_header)
+        return r.json()
+
+
+    def get_user(self, user_id):
+        endpoint = self.BASE_URL + '/api/users/' + str(user_id) + '/'
+        r = requests.get(endpoint, headers=self.auth_header)
+        return r.json()

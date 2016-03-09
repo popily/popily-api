@@ -131,4 +131,14 @@ class APITest(unittest.TestCase):
         self.assertTrue('embed_url' in insight)
 
 
+    def test_add_user(self):
+        import uuid
+        popily = Popily(API_KEY, url=URL)
+        random_name = str(uuid.uuid4().get_hex().upper()[0:6])
+        user = popily.add_user(username=random_name)
+
+        self.assertTrue('id' in user)
+        self.assertTrue(user['username'] == random_name)
+
+
         
