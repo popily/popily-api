@@ -60,7 +60,7 @@ class Popily:
 
         elif 'file_obj' in kwargs:
             r = requests.post(endpoint, data=post_data, 
-                    files=kwargs['file_obj'], headers=self.auth_header)
+                    files={'data': kwargs['file_obj']}, headers=self.auth_header)
 
         
         elif 'connection_string' in kwargs:
