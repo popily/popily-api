@@ -33,7 +33,8 @@ class Popily:
             'z_label',
             'category_order',
             'time_interval',
-            'refresh_rate'
+            'refresh_rate',
+            'swap'
         ]
 
         for key in editables:
